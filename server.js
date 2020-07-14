@@ -3,6 +3,9 @@ const shortid = require("shortid");
 
 const server = express();
 
+const postsRouter = require('./posts/posts-router.js');
+const contentsRouter = require('./contents/contnets-router.js');
+
 const pos = []
 
 
