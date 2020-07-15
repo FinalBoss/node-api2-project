@@ -73,21 +73,6 @@ router.put('/api/posts/:id', (req, res) => {
     })
 })
 
-router.get("/api/posts/:id/comments", async (req, res) => {
-    try {
-        const comments = await Posts.findPostComments(req.params.id);
-
-        if(comments.lenght > 0) {
-            res.status(200).json(comments);
-        } else {
-            res.status(404).json({ message: "No Comments for this Post"})
-        }
-    } catch (err) {
-        res.status(500).json({
-            message: "Error retrieving the Comments for this Post"
-        })
-    }
-})
 
 router.post('/api/posts/:id/comments', async (req, res) =>{
     const postInfo =  {...req.body, post_id: req.params.id };
