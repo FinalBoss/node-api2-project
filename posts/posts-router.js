@@ -1,12 +1,12 @@
 const express = require("express");
-const shortid = require("shortid");
+const Posts = require("../data/db");
 
 
 const router = express.Router();
 
 
 router.post('/api/posts', (req, res) =>{
-    Posts.add(req.body)
+    Posts.insert(req.body)
     .then(pos => {
        res.status(201).json(pos);
     })
@@ -92,7 +92,7 @@ router.get("/api/posts/:id/comments", async (req, res) => {
 router.post('/api/posts/:id/comments', async (req, res) =>{
     const postInfo =  {...req.body, post_id: req.params.id };
  try {
-  const comments = await Posts.addMessage(postInfo);
+  const comments = await Posts.insertComment(postInfo);
     res.status(201).json(comments)
  } catch (err){
      res.status(500).json({message: "errorMessage:", err});
